@@ -6,6 +6,7 @@ include(CTest)
 enable_testing()
 
 find_package(OpenCV CONFIG REQUIRED)
+
 find_package(dlib CONFIG REQUIRED)
 
 add_library(sober_lib STATIC src/sober.cpp)
