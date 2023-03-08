@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.0)
+
+# Set the project name
+project(sober_project)
+
+# Add the source files for the library
+add_library(sober_lib STATIC
+    src/sober.cpp
+)
+
+# Set the include directories for the library
+target_include_directories(sober_lib PUBLIC
+    include
+)
+
+# Add an executable that uses the library
+add_executable(main
+    src/main.cpp
+)
+
+# Link the library to the executable
+target_link_libraries(main PRIVATE sober_lib)
+
+# Set the output directory for the executable
+set_target_properties(main PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# Add a custom target to run the executable
+add_custom_target(run_main COMMAND ${CMAKE_BINARY_DIR}/bin/main)
+
+# Add a dependency from the run target to the executable
+add_dependencies(run_main main)
