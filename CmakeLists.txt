@@ -1,31 +1,21 @@
-cmake_minimum_required(VERSION 3.0)
 
-# Set the project name
-project(sober_project)
+cmake_minimum_required(VERSION 3.4.1)
+project(sober)
 
-# Add the source files for the library
-add_library(sober_lib STATIC
-    src/sober.cpp
-)
+include(CTest)
+enable_testing()
 
-# Set the include directories for the library
-target_include_directories(sober_lib PUBLIC
-    include
-)
+find_package(OpenCV CONFIG REQUIRED)
+find_package(dlib CONFIG REQUIRED)
 
-# Add an executable that uses the library
-add_executable(main
-    src/main.cpp
-)
+add_library(sober_lib STATIC src/sober.cpp)
+target_include_directories(sober_lib PUBLIC include)
 
-# Link the library to the executable
-target_link_libraries(main PRIVATE sober_lib)
+add_executable(main src/main.cpp)
+target_link_libraries(main PRIVATE sober_lib ${OpenCV_LIBS} dlib::dlib)
 
-# Set the output directory for the executable
-set_target_properties(main PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
 
-# Add a custom target to run the executable
-add_custom_target(run_main COMMAND ${CMAKE_BINARY_DIR}/bin/main)
 
-# Add a dependency from the run target to the executable
-add_dependencies(run_main main)

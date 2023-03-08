@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "configurePresets": [
+    {
+      "name": "macos-debug-gcc",
+      "displayName": "macos-debug-gcc",
+      "description": "Sets Ninja generator, build and install directory",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "/opt/homebrew/bin/aarch64-apple-darwin21-gcc-12",
+        "CMAKE_CXX_COMPILER": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-12",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      }
+    },
+    {
+      "name": "macos-release-gcc",
+      "displayName": "macos-release-gcc",
+      "description": "Sets Ninja generator, build and install directory",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "/opt/homebrew/bin/aarch64-apple-darwin21-gcc-12",
+        "CMAKE_CXX_COMPILER": "/opt/homebrew/bin/aarch64-apple-darwin21-g++-12",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      }
+    }
+  ]
+}
